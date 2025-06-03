@@ -16,6 +16,17 @@ import Register from "../views/auth/register.tsx";
 //import view login
 import Login from "../views/auth/login.tsx";
 
+import Dashboard from "../views/admin/dashboard/index.tsx";
+
+/**
+ * AppRoutes component defines the routing structure of the application using React Router.
+ * It conditionally renders pages based on authentication status:
+ * - Redirects authenticated users from '/register' and '/login' to '/admin/dashboard'.
+ * - Allows access to '/admin/dashboard' only if the user is authenticated, otherwise redirects to '/login'.
+ * - Always allows access to the Home page at the '/' route.
+ * Utilizes the AuthContext to determine if a user is authenticated.
+ */
+
 export default function AppRoutes() {
 
     // Menggunakan useContext untuk mendapatkan nilai dari AuthContext
@@ -37,6 +48,11 @@ export default function AppRoutes() {
             {/* route "/login" */}
             <Route path="/login" element={
                 isAuthenticated ? <Navigate to="/admin/dashboard" replace /> : <Login />
+            } />
+
+            {/* route "/admin/dashboard" */}
+            <Route path="/admin/dashboard" element={
+                isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
             } />
         </Routes>
     );
