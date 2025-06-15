@@ -18,6 +18,7 @@ import Login from "../views/auth/login.tsx";
 
 import Dashboard from "../views/admin/dashboard/index.tsx";
 import UsersIndex from '../views/admin/user/index.tsx';
+import UserCreate from '../views/admin/user/create.tsx';
 
 /**
  * AppRoutes component defines the routing structure of the application using React Router.
@@ -59,6 +60,11 @@ export default function AppRoutes() {
              {/* route "/admin/users" */}
             <Route path="/admin/users" element={
                 isAuthenticated ? <UsersIndex /> : <Navigate to="/login" replace />
+            } />
+
+            {/* route "/admin/users/create" */}
+            <Route path="/admin/users/create" element={
+                isAuthenticated ? <UserCreate /> : <Navigate to="/login" replace />
             } />
         </Routes>
     );
